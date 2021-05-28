@@ -86,8 +86,8 @@ public class SignUpActivity extends AppCompatActivity {
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-
                         Customer customer = new Customer(name, surname, email, phoneNumber);
+                        System.out.println(customer.getPhoneNumber());
                         HashMap<String, Object>  customerData = new HashMap<>();
                         customerData.put("customer", customer);
                         firebaseFirestore.collection("Customers").add(customerData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -98,8 +98,6 @@ public class SignUpActivity extends AppCompatActivity {
                                 //intentHome.putExtra("username", customer.getFirstName());
                                 intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intentHome);
-
-
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override
@@ -107,11 +105,6 @@ public class SignUpActivity extends AppCompatActivity {
                                 Toast.makeText(SignUpActivity.this, e.getLocalizedMessage().toString(), Toast.LENGTH_LONG).show();
                             }
                         });
-
-
-
-
-
                         Toast.makeText(SignUpActivity.this, "User created", Toast.LENGTH_LONG).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {

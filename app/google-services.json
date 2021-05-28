@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "20254581545",
-    "project_id": "marketapp-7e566",
-    "storage_bucket": "marketapp-7e566.appspot.com"
+    "project_number": "439075653568",
+    "project_id": "marketapp-7ffa3",
+    "storage_bucket": "marketapp-7ffa3.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:20254581545:android:9a3b5b019367138d458d38",
+        "mobilesdk_app_id": "1:439075653568:android:d5454933492c00f40caa25",
         "android_client_info": {
           "package_name": "com.oguz.marketapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "20254581545-a5t00t8udj4u9ln41nqfoc82c5l4ct8e.apps.googleusercontent.com",
+          "client_id": "439075653568-ntng9tijqu8jdc5r31ug6eqfit19qh07.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCNEzFOA-8zcCKhKWTFfmo3M747wZ2Tq1E"
+          "current_key": "AIzaSyAYNmifFrWARxAcvWaXR8TDI2Csiv38Ld4"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "20254581545-a5t00t8udj4u9ln41nqfoc82c5l4ct8e.apps.googleusercontent.com",
+              "client_id": "439075653568-ntng9tijqu8jdc5r31ug6eqfit19qh07.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
