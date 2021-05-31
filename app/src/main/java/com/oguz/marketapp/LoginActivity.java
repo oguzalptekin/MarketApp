@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
-                    Intent intentHome = new Intent(LoginActivity.this, HomeActivity.class);
+                    Intent intentHome = new Intent(LoginActivity.this,HomeActivity.class);
                     //intentHome.putExtra("username",  .getFirstName());
                     intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intentHome);

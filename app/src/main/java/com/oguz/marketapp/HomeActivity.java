@@ -40,7 +40,13 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         progressDialog.show();
 
         cardView = findViewById(R.id.cardview);
+        BuildRecyclerView();
 
+        EventChangeListener();
+
+
+    }
+    private void BuildRecyclerView(){
         recyclerView= findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -50,16 +56,27 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         myAdapter=new  MyAdapter(HomeActivity.this,productArrayList);
 
         recyclerView.setAdapter(myAdapter);
-        EventChangeListener();
 
+        myAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
+            @Override
+            public void OnItemClick(int position) {
+                if (position==0) {
+                    Intent intenttoproduct = new Intent(HomeActivity.this, SnackActivity.class);
+                    startActivity(intenttoproduct);
+                }
+                else if(position==2){
+                    Intent intenttoproduct = new Intent(HomeActivity.this, DrinkActivity.class);
+                    startActivity(intenttoproduct);
+                }
 
+            }
+        });
     }
-    /*private void productClicked(View view){
+    private void productClicked(View view){
         //Intent intenttoproduct = new Intent(this, SnackActivity.class);
-        System.out.println("ananınamı");
         //startActivity(intenttoproduct);
         //finish();
-    }*/
+    }
 
     private void EventChangeListener(){
         db.collection("Categories").addSnapshotListener(new EventListener<QuerySnapshot>() {
