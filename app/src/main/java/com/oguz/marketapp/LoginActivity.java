@@ -42,12 +42,12 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if(firebaseAuth.getCurrentUser() != null){
-            /*System.out.println(firebaseAuth.getCurrentUser().getEmail());
-            Intent homeintent = new Intent(LoginActivity.this, HomeActivity.class);
+        /*if(firebaseAuth.getCurrentUser() != null){
+            //System.out.println(firebaseAuth.getCurrentUser().getEmail());
+            Intent homeintent = new Intent(LoginActivity.this, HomePageActivity.class);
             startActivity(homeintent);
-            finish();*/
-        }
+            finish();
+        }*/
     }
 
     public void SignUpClicked(View view){
@@ -73,10 +73,19 @@ public class LoginActivity extends AppCompatActivity {
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
-                    Intent intentHome = new Intent(LoginActivity.this, HomeActivity.class);
-                    //intentHome.putExtra("username",  .getFirstName());
-                    intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                    startActivity(intentHome);
+
+                    if(email.matches("admin@admin.com")){
+                        Intent intentPanel = new Intent(LoginActivity.this, AdminPanelActivity.class);
+                        intentPanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intentPanel);
+                    }
+                    else{
+                        Intent intentHome = new Intent(LoginActivity.this, HomePageActivity.class);
+                        //intentHome.putExtra("username",  .getFirstName());
+                        intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        startActivity(intentHome);
+                    }
+
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -91,7 +100,5 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void forgetClicked(View view){
-
-    }
+    
 }

@@ -9,7 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MarketApp">
-        <activity android:name=".HomeActivity"></activity>
+        <activity android:name=".EditCategoryActivity"></activity>
+        <activity android:name=".DeleteCategoryActivity" />
+        <activity android:name=".AddCategoryActivity" />
+        <activity android:name=".EditProductActivity" />
+        <activity android:name=".DeleteProductActivity" />
+        <activity android:name=".AddProductActivity" />
+        <activity
+            android:name=".AdminPanelActivity"
+            android:label="@string/title_activity_admin_panel"
+            android:theme="@style/Theme.MarketApp.NoActionBar" />
+        <activity android:name=".HomePageActivity" />
         <activity android:name=".SignUpActivity" />
         <activity android:name=".LoginActivity">
             <intent-filter>
