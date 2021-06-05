@@ -60,12 +60,40 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         myAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(int position) {
-                if (position==0) {
+                if (productArrayList.get(position).categoryname.equals("Snacks")) {
                     Intent intenttoproduct = new Intent(HomeActivity.this, SnackActivity.class);
                     startActivity(intenttoproduct);
                 }
-                else if(position==2){
+                if (productArrayList.get(position).categoryname.equals("Green Grocer")) {
+                    Intent intenttoproduct = new Intent(HomeActivity.this, GreenGrocerActivity.class);
+                    startActivity(intenttoproduct);
+                }
+                if(productArrayList.get(position).categoryname.equals("Drinks")){
                     Intent intenttoproduct = new Intent(HomeActivity.this, DrinkActivity.class);
+                    startActivity(intenttoproduct);
+                }
+                if(productArrayList.get(position).categoryname.equals("Others")){
+                    Intent intenttoproduct = new Intent(HomeActivity.this, OthersActivity.class);
+                    startActivity(intenttoproduct);
+                }
+                if(productArrayList.get(position).categoryname.equals("Food")){
+                    Intent intenttoproduct = new Intent(HomeActivity.this, FoodActivity.class);
+                    startActivity(intenttoproduct);
+                }
+                if(productArrayList.get(position).categoryname.equals("Technology")){
+                    Intent intenttoproduct = new Intent(HomeActivity.this, TechnologyActivity.class);
+                    startActivity(intenttoproduct);
+                }
+                if(productArrayList.get(position).categoryname.equals("Baker")){
+                    Intent intenttoproduct = new Intent(HomeActivity.this, BakerActivity.class);
+                    startActivity(intenttoproduct);
+                }
+                if(productArrayList.get(position).categoryname.equals("Staple Food")){
+                    Intent intenttoproduct = new Intent(HomeActivity.this, StapleActivity.class);
+                    startActivity(intenttoproduct);
+                }
+                if(productArrayList.get(position).categoryname.equals("Pet Food")){
+                    Intent intenttoproduct = new Intent(HomeActivity.this, PetFoodActivity.class);
                     startActivity(intenttoproduct);
                 }
 
