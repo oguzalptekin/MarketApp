@@ -80,10 +80,10 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(intentPanel);
                     }
                     else{
-                        Intent intentHome = new Intent(LoginActivity.this, HomePageActivity.class);
+                        //Intent intentHome = new Intent(LoginActivity.this, HomePageActivity.class);
                         //intentHome.putExtra("username",  .getFirstName());
-                        intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intentHome);
+                        //intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        //startActivity(intentHome);
                     }
 
 
