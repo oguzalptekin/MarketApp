@@ -18,6 +18,15 @@ public class SnackAdapter extends RecyclerView.Adapter<SnackAdapter.MyViewHolder
     Context context;
     ArrayList<Snacks> snacksArrayList;
 
+    private SnackAdapter.OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
+    }
+    public void setOnItemClickListener(SnackAdapter.OnItemClickListener listener){
+        mListener=listener;
+    }
+
     public SnackAdapter(Context context, ArrayList<Snacks> snacksArrayList) {
         this.context = context;
         this.snacksArrayList = snacksArrayList;
@@ -28,7 +37,7 @@ public class SnackAdapter extends RecyclerView.Adapter<SnackAdapter.MyViewHolder
     public SnackAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.snackitem,parent,false);
 
-        return new MyViewHolder(v);
+        return new MyViewHolder(v,mListener);
     }
 
     @Override
@@ -50,11 +59,22 @@ public class SnackAdapter extends RecyclerView.Adapter<SnackAdapter.MyViewHolder
 
         TextView snackname, snackprice,snackweight;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, SnackAdapter.OnItemClickListener listener) {
             super(itemView);
             snackname = itemView.findViewById(R.id.snackproduct);
             snackprice= itemView.findViewById(R.id.snackprice);
             snackweight= itemView.findViewById(R.id.snackweight);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener!=null){
+                        int position=getAdapterPosition();
+                        if (position!=RecyclerView.NO_POSITION)
+                            listener.OnItemClick(position);
+                    }
+                }
+            });
         }
     }
 }

@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        logo = findViewById(R.id.logo_imageview);
         emailTxt = findViewById(R.id.emailTxt);
         passwordTxt = findViewById(R.id.passwordTxt);
         forgetBtn = findViewById(R.id.forgetBtn);
@@ -53,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     public void SignUpClicked(View view){
         Intent intenttoSignUp = new Intent(LoginActivity.this, SignUpActivity.class);
         startActivity(intenttoSignUp);
-        finish();
+        //finish();
     }
 
     public void SignInClicked(View view){
@@ -73,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
-                    Intent intentHome = new Intent(LoginActivity.this,HomeActivity.class);
+                    Intent intentHome = new Intent(LoginActivity.this,LoadingScreen.class);
                     //intentHome.putExtra("username",  .getFirstName());
                     intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     startActivity(intentHome);

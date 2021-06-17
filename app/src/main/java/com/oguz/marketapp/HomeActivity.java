@@ -72,10 +72,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intenttoproduct = new Intent(HomeActivity.this, DrinkActivity.class);
                     startActivity(intenttoproduct);
                 }
-                if(productArrayList.get(position).categoryname.equals("Others")){
-                    Intent intenttoproduct = new Intent(HomeActivity.this, OthersActivity.class);
-                    startActivity(intenttoproduct);
-                }
                 if(productArrayList.get(position).categoryname.equals("Food")){
                     Intent intenttoproduct = new Intent(HomeActivity.this, FoodActivity.class);
                     startActivity(intenttoproduct);
@@ -96,16 +92,14 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intenttoproduct = new Intent(HomeActivity.this, PetFoodActivity.class);
                     startActivity(intenttoproduct);
                 }
+                if(productArrayList.get(position).categoryname.equals("Others")){
+                    Intent intenttoproduct = new Intent(HomeActivity.this, OthersActivity.class);
+                    startActivity(intenttoproduct);
+                }
 
             }
         });
     }
-    private void productClicked(View view){
-        //Intent intenttoproduct = new Intent(this, SnackActivity.class);
-        //startActivity(intenttoproduct);
-        //finish();
-    }
-
     private void EventChangeListener(){
         db.collection("Categories").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override

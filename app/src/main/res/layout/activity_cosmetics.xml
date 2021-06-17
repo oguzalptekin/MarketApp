@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/loginbackground"
-    tools:context=".OthersActivity">
+    tools:context=".CosmeticsActivity">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/othersrecycler"
+        android:id="@+id/cosmeticsrecycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
