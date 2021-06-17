@@ -87,17 +87,17 @@ public class SignUpActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(AuthResult authResult) {
                         Customer customer = new Customer(name, surname, email, phoneNumber);
-                        //System.out.println(customer.getPhoneNumber());
+                        System.out.println(customer.getPhoneNumber());
                         HashMap<String, Object>  customerData = new HashMap<>();
                         customerData.put("customer", customer);
                         firebaseFirestore.collection("Customers").add(customerData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
-                                //Toast.makeText(SignUpActivity.this, "User Created Successfully", Toast.LENGTH_LONG).show();
-                                //Intent intentHome = new Intent(SignUpActivity.this, HomePageActivity.class);
+                                Toast.makeText(SignUpActivity.this, "User Created Successfully", Toast.LENGTH_LONG).show();
+                                Intent intentHome = new Intent(SignUpActivity.this, LoadingScreen.class);
                                 //intentHome.putExtra("username", customer.getFirstName());
-                                //intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                //startActivity(intentHome);
+                                intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                startActivity(intentHome);
                             }
                         }).addOnFailureListener(new OnFailureListener() {
                             @Override

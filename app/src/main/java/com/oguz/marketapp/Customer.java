@@ -14,6 +14,11 @@ public class Customer extends User{
         super(FirstName, LastName, email);
         this.phoneNumber = phoneNumber;
     }
+    public Customer(String firstName, String lastName, String email, String phoneNumber,HashMap<String, Product> cart){
+        super(firstName, lastName, email);
+        this.phoneNumber = phoneNumber;
+        this.cart=cart;
+    }
 
     public Customer(String firstName, String lastName, String email, Address address, CreditCard creditcard, Date birthDate, String phoneNumber, HashMap<String, Product> cart) { //all informations
         super(firstName, lastName, email);

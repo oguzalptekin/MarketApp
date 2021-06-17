@@ -29,7 +29,6 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        logo = findViewById(R.id.logo_imageview);
         emailTxt = findViewById(R.id.emailTxt);
         passwordTxt = findViewById(R.id.passwordTxt);
         forgetBtn = findViewById(R.id.forgetBtn);
@@ -42,18 +41,18 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        /*if(firebaseAuth.getCurrentUser() != null){
-            //System.out.println(firebaseAuth.getCurrentUser().getEmail());
-            Intent homeintent = new Intent(LoginActivity.this, HomePageActivity.class);
+        if(firebaseAuth.getCurrentUser() != null){
+            /*System.out.println(firebaseAuth.getCurrentUser().getEmail());
+            Intent homeintent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(homeintent);
-            finish();
-        }*/
+            finish();*/
+        }
     }
 
     public void SignUpClicked(View view){
         Intent intenttoSignUp = new Intent(LoginActivity.this, SignUpActivity.class);
         startActivity(intenttoSignUp);
-        finish();
+        //finish();
     }
 
     public void SignInClicked(View view){
@@ -73,19 +72,10 @@ public class LoginActivity extends AppCompatActivity {
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                 @Override
                 public void onSuccess(AuthResult authResult) {
-
-                    if(email.matches("admin@admin.com")){
-                        Intent intentPanel = new Intent(LoginActivity.this, AdminPanelActivity.class);
-                        intentPanel.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        startActivity(intentPanel);
-                    }
-                    else{
-                        //Intent intentHome = new Intent(LoginActivity.this, HomePageActivity.class);
-                        //intentHome.putExtra("username",  .getFirstName());
-                        //intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        //startActivity(intentHome);
-                    }
-
+                    Intent intentHome = new Intent(LoginActivity.this,LoadingScreen.class);
+                    //intentHome.putExtra("username",  .getFirstName());
+                    intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intentHome);
 
                 }
             }).addOnFailureListener(new OnFailureListener() {
@@ -100,5 +90,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    
+    public void forgetClicked(View view){
+
+    }
 }
