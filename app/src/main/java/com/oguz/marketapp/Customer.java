@@ -1,6 +1,8 @@
 package com.oguz.marketapp;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Stack;
 
 public class Customer extends User{
 
@@ -8,19 +10,26 @@ public class Customer extends User{
     private CreditCard creditcard;
     private Date birthDate;
     private String phoneNumber;
-    private HashMap<String, Product> cart;
+    private String Uid;
+    private ArrayList<Product> cart;
 
-    public Customer(String FirstName, String LastName, String email, String phoneNumber){
+    public Customer(){
+        super();
+    }
+
+    public Customer(String FirstName, String LastName, String email, String phoneNumber,String Uid){
         super(FirstName, LastName, email);
         this.phoneNumber = phoneNumber;
+        this.Uid=Uid;
     }
-    public Customer(String firstName, String lastName, String email, String phoneNumber,HashMap<String, Product> cart){
+    public Customer(String firstName, String lastName, String email, String phoneNumber,ArrayList<Product> cart,String Uid){
         super(firstName, lastName, email);
         this.phoneNumber = phoneNumber;
         this.cart=cart;
+        this.Uid=Uid;
     }
 
-    public Customer(String firstName, String lastName, String email, Address address, CreditCard creditcard, Date birthDate, String phoneNumber, HashMap<String, Product> cart) { //all informations
+    public Customer(String firstName, String lastName, String email, Address address, CreditCard creditcard, Date birthDate, String phoneNumber, ArrayList<Product> cart) { //all informations
         super(firstName, lastName, email);
         this.address = address;
         this.creditcard = creditcard;
@@ -29,7 +38,7 @@ public class Customer extends User{
         this.cart = cart;
     }
 
-    public Customer(String firstName, String lastName, String email, CreditCard creditcard, Date birthDate, String phoneNumber, HashMap<String, Product> cart) { //without address
+    public Customer(String firstName, String lastName, String email, CreditCard creditcard, Date birthDate, String phoneNumber, ArrayList<Product> cart) { //without address
         super(firstName, lastName, email);
         this.creditcard = creditcard;
         this.birthDate = birthDate;
@@ -37,7 +46,7 @@ public class Customer extends User{
         this.cart = cart;
     }
 
-    public Customer(String firstName, String lastName, String email, Address address, Date birthDate, String phoneNumber, HashMap<String, Product> cart) { //without credit card
+    public Customer(String firstName, String lastName, String email, Address address, Date birthDate, String phoneNumber, ArrayList<Product> cart) { //without credit card
         super(firstName, lastName, email);
         this.address = address;
         this.birthDate = birthDate;
@@ -45,7 +54,15 @@ public class Customer extends User{
         this.cart = cart;
     }
 
-    public Customer(String firstName, String lastName, String email, Address address, CreditCard creditcard, String phoneNumber, HashMap<String, Product> cart) { //without birthdate
+    public ArrayList<Product> getCart() {
+        return cart;
+    }
+
+    public void setCart(Product item) {
+        cart.add(item);
+    }
+
+    public Customer(String firstName, String lastName, String email, Address address, CreditCard creditcard, String phoneNumber, ArrayList<Product> cart) { //without birthdate
         super(firstName, lastName, email);
         this.address = address;
         this.creditcard = creditcard;
@@ -85,11 +102,19 @@ public class Customer extends User{
         this.phoneNumber = phoneNumber;
     }
 
-    public HashMap<String, Product> getCart() {
+    /*public Stack<Product> getCart() {
         return cart;
+    }*/
+
+    /*public void setCart(Product producitem) {
+        cart.push(producitem);
+    }*/
+
+    public String getUid() {
+        return Uid;
     }
 
-    public void setCart(HashMap<String, Product> cart) {
-        this.cart = cart;
+    public void setUid(String uid) {
+        Uid = uid;
     }
 }

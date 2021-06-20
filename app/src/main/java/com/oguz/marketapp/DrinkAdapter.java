@@ -16,9 +16,20 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.MyViewHolder
     Context context;
     ArrayList<Drinks> drinksArrayList;
 
+    private DrinkAdapter.OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
+    }
+    public void setOnItemClickListener(DrinkAdapter.OnItemClickListener listener){
+        mListener=listener;
+    }
+
+
     public DrinkAdapter(Context context, ArrayList<Drinks> drinksArrayList) {
         this.context = context;
         this.drinksArrayList = drinksArrayList;
+
     }
 
     @NonNull
@@ -26,7 +37,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.MyViewHolder
     public DrinkAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.drinkitem,parent,false);
 
-        return new MyViewHolder(v);
+        return new MyViewHolder(v,mListener);
     }
 
     @Override
@@ -47,11 +58,22 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.MyViewHolder
 
         TextView drinkname, drinkprice,drinklitre;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView,DrinkAdapter.OnItemClickListener listener) {
             super(itemView);
             drinkname = itemView.findViewById(R.id.drinkproduct);
             drinkprice= itemView.findViewById(R.id.drinkprice);
             drinklitre= itemView.findViewById(R.id.drinklitre);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener!=null){
+                        int position=getAdapterPosition();
+                        if (position!=RecyclerView.NO_POSITION)
+                            listener.OnItemClick(position);
+                    }
+                }
+            });
         }
     }
 }

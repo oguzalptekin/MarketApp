@@ -16,6 +16,15 @@ public class StapleAdapter extends RecyclerView.Adapter<StapleAdapter.MyViewHold
     Context context;
     ArrayList<StapleFood> stapleFoodArrayList;
 
+    private StapleAdapter.OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
+    }
+    public void setOnItemClickListener(StapleAdapter.OnItemClickListener listener){
+        mListener=listener;
+    }
+
     public StapleAdapter(Context context, ArrayList<StapleFood> stapleFoodArrayList) {
         this.context = context;
         this.stapleFoodArrayList = stapleFoodArrayList;
@@ -26,7 +35,7 @@ public class StapleAdapter extends RecyclerView.Adapter<StapleAdapter.MyViewHold
     public StapleAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.staplefooditem,parent,false);
 
-        return new MyViewHolder(v);
+        return new MyViewHolder(v,mListener);
     }
 
     @Override
@@ -45,10 +54,21 @@ public class StapleAdapter extends RecyclerView.Adapter<StapleAdapter.MyViewHold
 
         TextView staplename, stapleprice;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView,StapleAdapter.OnItemClickListener listener) {
             super(itemView);
             staplename = itemView.findViewById(R.id.staplename);
             stapleprice= itemView.findViewById(R.id.stapleprice);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener!=null){
+                        int position=getAdapterPosition();
+                        if (position!=RecyclerView.NO_POSITION)
+                            listener.OnItemClick(position);
+                    }
+                }
+            });
         }
     }
 }

@@ -16,6 +16,15 @@ public class GreenGrocerAdapter extends RecyclerView.Adapter<GreenGrocerAdapter.
     Context context;
     ArrayList<GreenGrocer> greenGrocerArrayList;
 
+    private GreenGrocerAdapter.OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
+    }
+    public void setOnItemClickListener(GreenGrocerAdapter.OnItemClickListener listener){
+        mListener=listener;
+    }
+
     public GreenGrocerAdapter(Context context, ArrayList<GreenGrocer> greenGrocerArrayList) {
         this.context = context;
         this.greenGrocerArrayList = greenGrocerArrayList;
@@ -26,7 +35,7 @@ public class GreenGrocerAdapter extends RecyclerView.Adapter<GreenGrocerAdapter.
     public GreenGrocerAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.greengroceritem,parent,false);
 
-        return new MyViewHolder(v);
+        return new MyViewHolder(v,mListener);
     }
 
     @Override
@@ -47,11 +56,22 @@ public class GreenGrocerAdapter extends RecyclerView.Adapter<GreenGrocerAdapter.
 
         TextView grocername, grocerprice,grocerweight;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, GreenGrocerAdapter.OnItemClickListener listener) {
             super(itemView);
             grocername = itemView.findViewById(R.id.grocerproduct);
             grocerprice= itemView.findViewById(R.id.grocerprice);
             grocerweight= itemView.findViewById(R.id.grocerweight);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener!=null){
+                        int position=getAdapterPosition();
+                        if (position!=RecyclerView.NO_POSITION)
+                            listener.OnItemClick(position);
+                    }
+                }
+            });
         }
     }
 }

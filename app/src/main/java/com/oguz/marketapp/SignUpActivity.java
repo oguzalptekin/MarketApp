@@ -86,11 +86,28 @@ public class SignUpActivity extends AppCompatActivity {
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Customer customer = new Customer(name, surname, email, phoneNumber);
+                        Customer customer = new Customer(name, surname, email, phoneNumber,firebaseAuth.getCurrentUser().getUid());
                         System.out.println(customer.getPhoneNumber());
                         HashMap<String, Object>  customerData = new HashMap<>();
                         customerData.put("customer", customer);
-                        firebaseFirestore.collection("Customers").add(customerData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        firebaseFirestore.collection("Customers").document(firebaseAuth.getCurrentUser().getUid()).set(customer)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(SignUpActivity.this, "User Created Successfully", Toast.LENGTH_LONG).show();
+                                        Intent intentHome = new Intent(SignUpActivity.this, LoadingScreen.class);
+                                        //intentHome.putExtra("username", customer.getFirstName());
+                                        intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intentHome);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(SignUpActivity.this, e.getLocalizedMessage().toString(), Toast.LENGTH_LONG).show();
+                            }
+                        });
+
+                        /*firebaseFirestore.collection("Customers").add(customerData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                             @Override
                             public void onSuccess(DocumentReference documentReference) {
                                 Toast.makeText(SignUpActivity.this, "User Created Successfully", Toast.LENGTH_LONG).show();
@@ -104,8 +121,8 @@ public class SignUpActivity extends AppCompatActivity {
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(SignUpActivity.this, e.getLocalizedMessage().toString(), Toast.LENGTH_LONG).show();
                             }
-                        });
-                        Toast.makeText(SignUpActivity.this, "User created", Toast.LENGTH_LONG).show();
+                        });*/
+                        //Toast.makeText(SignUpActivity.this, "User created", Toast.LENGTH_LONG).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

@@ -15,6 +15,15 @@ public class CosmeticsAdapter extends RecyclerView.Adapter<CosmeticsAdapter.MyVi
         Context context;
         ArrayList<Cosmetics> cosmeticsArrayList;
 
+    private CosmeticsAdapter.OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
+    }
+    public void setOnItemClickListener(CosmeticsAdapter.OnItemClickListener listener){
+        mListener=listener;
+    }
+
     public CosmeticsAdapter(Context context, ArrayList<Cosmetics> cosmeticsArrayList) {
         this.context = context;
         this.cosmeticsArrayList = cosmeticsArrayList;
@@ -25,7 +34,7 @@ public class CosmeticsAdapter extends RecyclerView.Adapter<CosmeticsAdapter.MyVi
     public CosmeticsAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.cosmeticsitem,parent,false);
 
-        return new MyViewHolder(v);
+        return new MyViewHolder(v,mListener);
     }
 
     @Override
@@ -44,10 +53,21 @@ public class CosmeticsAdapter extends RecyclerView.Adapter<CosmeticsAdapter.MyVi
 
         TextView cosmeticsname, cosmeticsprice;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, CosmeticsAdapter.OnItemClickListener listener) {
             super(itemView);
             cosmeticsname = itemView.findViewById(R.id.cosmeticname);
             cosmeticsprice= itemView.findViewById(R.id.cosmeticprice);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener!=null){
+                        int position=getAdapterPosition();
+                        if (position!=RecyclerView.NO_POSITION)
+                            listener.OnItemClick(position);
+                    }
+                }
+            });
         }
     }
 }

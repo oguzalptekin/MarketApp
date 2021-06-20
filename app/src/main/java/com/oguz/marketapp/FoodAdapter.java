@@ -15,6 +15,15 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
     Context context;
     ArrayList<Food> foodArrayList;
 
+    private FoodAdapter.OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
+    }
+    public void setOnItemClickListener(FoodAdapter.OnItemClickListener listener){
+        mListener=listener;
+    }
+
     public FoodAdapter(Context context, ArrayList<Food> foodArrayList) {
         this.context = context;
         this.foodArrayList = foodArrayList;
@@ -25,7 +34,7 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
     public FoodAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.fooditem,parent,false);
 
-        return new MyViewHolder(v);
+        return new MyViewHolder(v,mListener);
     }
 
     @Override
@@ -44,10 +53,21 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder>{
 
         TextView foodname, foodprice;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView,FoodAdapter.OnItemClickListener listener) {
             super(itemView);
             foodname = itemView.findViewById(R.id.foodproduct);
             foodprice= itemView.findViewById(R.id.foodprice);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener!=null){
+                        int position=getAdapterPosition();
+                        if (position!=RecyclerView.NO_POSITION)
+                            listener.OnItemClick(position);
+                    }
+                }
+            });
         }
     }
 }

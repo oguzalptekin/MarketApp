@@ -15,6 +15,15 @@ public class OthersAdapter extends RecyclerView.Adapter<OthersAdapter.MyViewHold
     Context context;
     ArrayList<Others> othersArrayList;
 
+    private OthersAdapter.OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
+    }
+    public void setOnItemClickListener(OthersAdapter.OnItemClickListener listener){
+        mListener=listener;
+    }
+
     public OthersAdapter(Context context, ArrayList<Others> othersArrayList) {
         this.context = context;
         this.othersArrayList = othersArrayList;
@@ -25,7 +34,7 @@ public class OthersAdapter extends RecyclerView.Adapter<OthersAdapter.MyViewHold
     public OthersAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.othersitem,parent,false);
 
-        return new MyViewHolder(v);
+        return new MyViewHolder(v,mListener);
     }
 
     @Override
@@ -44,10 +53,21 @@ public class OthersAdapter extends RecyclerView.Adapter<OthersAdapter.MyViewHold
     public static class MyViewHolder extends RecyclerView.ViewHolder{
 
         TextView othersname,othersprice;
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView,OthersAdapter.OnItemClickListener listener) {
             super(itemView);
             othersname = itemView.findViewById(R.id.othersproduct);
             othersprice= itemView.findViewById(R.id.othersprice);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener!=null){
+                        int position=getAdapterPosition();
+                        if (position!=RecyclerView.NO_POSITION)
+                            listener.OnItemClick(position);
+                    }
+                }
+            });
         }
     }
 }

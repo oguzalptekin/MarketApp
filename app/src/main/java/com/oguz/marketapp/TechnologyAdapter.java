@@ -15,6 +15,14 @@ public class TechnologyAdapter extends RecyclerView.Adapter<TechnologyAdapter.My
     Context context;
     ArrayList<Technology> technologyArrayList;
 
+    private TechnologyAdapter.OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
+    }
+    public void setOnItemClickListener(TechnologyAdapter.OnItemClickListener listener){
+        mListener=listener;
+    }
     public TechnologyAdapter(Context context, ArrayList<Technology> technologyArrayList) {
         this.context = context;
         this.technologyArrayList = technologyArrayList;
@@ -25,7 +33,7 @@ public class TechnologyAdapter extends RecyclerView.Adapter<TechnologyAdapter.My
     public TechnologyAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(context).inflate(R.layout.technologyitem,parent,false);
 
-        return new MyViewHolder(v);
+        return new MyViewHolder(v,mListener);
     }
 
     @Override
@@ -45,11 +53,22 @@ public class TechnologyAdapter extends RecyclerView.Adapter<TechnologyAdapter.My
 
         TextView techname, techprice,techbrand;
 
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView,TechnologyAdapter.OnItemClickListener listener) {
             super(itemView);
             techname = itemView.findViewById(R.id.technologyname);
             techprice= itemView.findViewById(R.id.technologyprice);
             techbrand= itemView.findViewById(R.id.technologybrand);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener!=null){
+                        int position=getAdapterPosition();
+                        if (position!=RecyclerView.NO_POSITION)
+                            listener.OnItemClick(position);
+                    }
+                }
+            });
         }
     }
 }

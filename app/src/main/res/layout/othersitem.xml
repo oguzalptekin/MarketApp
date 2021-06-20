@@ -42,13 +42,7 @@
             android:layout_gravity="center_vertical"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/black"
-                android:textSize="26sp"
-                android:textStyle="bold" />
+
 
             <TextView
                 android:id="@+id/othersprice"
@@ -57,6 +51,14 @@
                 android:layout_marginStart="8dp"
                 android:textColor="@color/black"
                 android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" ₺"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
         </LinearLayout>
 
     </LinearLayout>

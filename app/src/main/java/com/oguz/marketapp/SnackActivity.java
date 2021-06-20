@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ProgressBar;
@@ -19,16 +20,21 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.SetOptions;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 public class SnackActivity extends AppCompatActivity {
     FirebaseAuth firebaseAuth;
@@ -43,13 +49,12 @@ public class SnackActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_snack);
 
-        progressDialog =new ProgressDialog(this);
+        progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
         progressDialog.setMessage("Fetching Data...");
         progressDialog.show();
 
-
-        recyclerView1= findViewById(R.id.snackrecycler);
+        recyclerView1 = findViewById(R.id.snackrecycler);
         recyclerView1.setHasFixedSize(true);
         recyclerView1.setLayoutManager(new LinearLayoutManager(this));
 
@@ -57,65 +62,91 @@ public class SnackActivity extends AppCompatActivity {
         firebaseAuth = FirebaseAuth.getInstance();
 
         snacksArrayList = new ArrayList<Snacks>();
-        snackAdapter = new SnackAdapter(SnackActivity.this,snacksArrayList);
+        snackAdapter = new SnackAdapter(SnackActivity.this, snacksArrayList);
 
         recyclerView1.setAdapter(snackAdapter);
 
         snackAdapter.setOnItemClickListener(new SnackAdapter.OnItemClickListener() {
-
-            String name,surname,email,phoneNumber;
             @Override
             public void OnItemClick(int position) {
-                    FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-                    final String currentUserEmail = currentUser.getEmail();
-                    fb.collection("Customers").whereEqualTo("email",currentUserEmail).get()
-                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()){
-                                for (DocumentSnapshot document : task.getResult()) {
-                                    name=document.get("firstName").toString();
-                                    surname=document.get("lastName").toString();
-                                    email=document.get("email").toString();
-                                    phoneNumber=document.get("phoneNumber").toString();
-                                }
+                FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+                final String currentUid = currentUser.getUid();
+                DocumentReference reference;
+                reference=fb.collection("Customers").document(currentUid);
+                reference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        if (task.getResult().exists()){
+                            boolean alreadyinCart=false;
+                            //String name = task.getResult().getString("firstName");
+                            ArrayList<Product> cart = new ArrayList<>();
+                            ArrayList<Snacks> temp =(ArrayList<Snacks>) task.getResult().get("cart");
+                            if (temp!=null && !temp.isEmpty()){
+                                for (int i=0; i<temp.size(); i++){
+                                    Snacks snacks = new Snacks();
+                                    List<Map<String,Object>> group = (List<Map<String,Object>>) task.getResult().get("cart");
+                                    Map<String,Object> map=group.get(i);
+                                        snacks.productname= (String)map.get("productname");
+                                        if (snacks.productname.equals(snacksArrayList.get(position).productname)){
+                                            long quantity=(long)map.get("quantity");
+                                            snacks.quantity=((int)quantity)+1;
+                                            alreadyinCart=true;
+                                        }
+                                        else
+                                        {
+                                            long quantity=(long)map.get("quantity");
+                                            snacks.quantity=((int)quantity);
+                                        }
+                                        long price =(long) map.get("price");
+                                        snacks.setPrice((int)price);
+                                        snacks.setCategoryname((String)map.get("categoryname"));
+                                        cart.add(snacks);
+                                    }
                             }
-                        }
-                    });
-                    /*Map<String, Product> cart = new HashMap<>();
-                    cart.put(cart,)
-                    Customer customer = new Customer(name, surname, email, phoneNumber,cart);
+                            if (alreadyinCart==false){
+                                Snacks snacks = new Snacks();
+                                snacks.quantity=1;
+                                snacks.setProductname(snacksArrayList.get(position).productname);
+                                snacks.setPrice(snacksArrayList.get(position).price);
+                                snacks.setCategoryname("Snacks");
+                                cart.add(snacks);
+                            }
 
-                    fb.collection("Customers").document(firebaseAuth.getCurrentUser().getUid()).update("customer",cart)
-                            .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            Toast.makeText(SnackActivity.this, "Product Added to Cart Successfully", Toast.LENGTH_LONG).show();
+                            Customer customer = new Customer(task.getResult().getString("firstName"),
+                                    task.getResult().getString("lastName"), task.getResult().getString("email"),
+                                    task.getResult().getString("phoneNumber"), cart, currentUid);
+                            fb.collection("Customers").document(currentUid).set(customer).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    Toast.makeText(SnackActivity.this, "Product added to cart", Toast.LENGTH_LONG).show();
+                                }
+                            }).addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(SnackActivity.this, "Product not added to cart", Toast.LENGTH_LONG).show();
+                                }
+                            });
                         }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Toast.makeText(SnackActivity.this, "Sorry there is a mistake", Toast.LENGTH_LONG).show();
-                        }
-                    });*/
+                    }
+                });
             }
         });
-
         EventChangeListener();
 
     }
-    private void EventChangeListener(){
+
+    private void EventChangeListener() {
         fb.collection("Snacks").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
-                if (error!=null){
+                if (error != null) {
                     if (progressDialog.isShowing())
                         progressDialog.dismiss();
-                    Log.e("Firestore error",error.getMessage());
+                    Log.e("Firestore error", error.getMessage());
                     return;
                 }
-                for (DocumentChange doc : value.getDocumentChanges()){
-                    if (doc.getType() == DocumentChange.Type.ADDED){
+                for (DocumentChange doc : value.getDocumentChanges()) {
+                    if (doc.getType() == DocumentChange.Type.ADDED) {
                         snacksArrayList.add(doc.getDocument().toObject(Snacks.class));
                     }
 
