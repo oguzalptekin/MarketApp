@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddCategoryActivity">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ADD CATEGORY"
+        android:textAlignment="center"
+        android:padding="10dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold">
+    </TextView>
+
+    <EditText
+        android:id="@+id/addCategory_categoryName"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Category Name"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:padding="10dp">
+    </EditText>
+
+    <Button
+        android:id="@+id/category_add_button"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="30dp"
+        android:layout_marginTop="40dp"
+        android:text="ADD CATEGORY"
+        android:onClick="AddCategoryClicked">
+    </Button>
+
+</LinearLayout>
