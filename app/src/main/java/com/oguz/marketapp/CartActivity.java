@@ -8,9 +8,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,12 +38,20 @@ public class CartActivity extends AppCompatActivity {
     ArrayList<Product> productArrayList;
     CartAdapter cartAdapter;
     FirebaseFirestore db;
-
+    Button paymentbutton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cart);
 
+        paymentbutton = findViewById(R.id.Paymentbtn);
+        paymentbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(CartActivity.this,PaymentActivity.class);
+                startActivity(intent);
+            }
+        });
         BuildRecyclerView();
 
         EventChangeListener();
@@ -88,7 +98,6 @@ public class CartActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
     private void ComputeTotalPrice(){
         TextView pricetext=(TextView)findViewById(R.id.TotalPricetext);
@@ -107,9 +116,18 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.getResult().exists()) {
+
+                    ArrayList<Product> tempAr=new ArrayList<>();
+                    for (int i=0;i<productArrayList.size();i++){
+                        Snacks snacks=new Snacks();
+                        snacks.productname=productArrayList.get(i).categoryname;
+                        snacks.price=productArrayList.get(i).price;
+                        snacks.quantity=productArrayList.get(i).quantity;
+                        tempAr.add(snacks);
+                    }
                     Customer customer = new Customer(task.getResult().getString("firstName"),
                             task.getResult().getString("lastName"), task.getResult().getString("email"),
-                            task.getResult().getString("phoneNumber"), productArrayList, currentUid);
+                            task.getResult().getString("phoneNumber"),tempAr , currentUid);
                     db.collection("Customers").document(currentUid).set(customer);
                 }
             }

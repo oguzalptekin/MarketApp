@@ -38,12 +38,12 @@ public class Customer extends User{
         this.cart = cart;
     }
 
-    public Customer(String firstName, String lastName, String email, CreditCard creditcard, Date birthDate, String phoneNumber, ArrayList<Product> cart) { //without address
+    public Customer(String firstName, String lastName, String email, CreditCard creditcard, String phoneNumber, ArrayList<Product> cart,String Uid) { //without address
         super(firstName, lastName, email);
         this.creditcard = creditcard;
-        this.birthDate = birthDate;
         this.phoneNumber = phoneNumber;
         this.cart = cart;
+        this.Uid=Uid;
     }
 
     public Customer(String firstName, String lastName, String email, Address address, Date birthDate, String phoneNumber, ArrayList<Product> cart) { //without credit card

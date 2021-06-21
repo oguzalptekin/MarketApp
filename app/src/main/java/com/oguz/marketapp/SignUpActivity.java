@@ -88,8 +88,6 @@ public class SignUpActivity extends AppCompatActivity {
                     public void onSuccess(AuthResult authResult) {
                         Customer customer = new Customer(name, surname, email, phoneNumber,firebaseAuth.getCurrentUser().getUid());
                         System.out.println(customer.getPhoneNumber());
-                        HashMap<String, Object>  customerData = new HashMap<>();
-                        customerData.put("customer", customer);
                         firebaseFirestore.collection("Customers").document(firebaseAuth.getCurrentUser().getUid()).set(customer)
                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                     @Override
