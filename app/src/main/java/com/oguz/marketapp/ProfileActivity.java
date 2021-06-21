@@ -35,16 +35,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-        myAddress = findViewById(R.id.myAddress);
-        myFavourites = findViewById(R.id.myFavourites);
-        orderHistory = findViewById(R.id.orderHistory);
-        paymentMethod = findViewById(R.id.paymentMethod);
-        changePassword = findViewById(R.id.changePassword);
-        help = findViewById(R.id.help);
-        logOut = findViewById(R.id.logOut);
-
-
+        firebaseAuth=FirebaseAuth.getInstance();
 
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setSelectedItemId(R.id.profile_navigation);
@@ -64,7 +55,16 @@ public class ProfileActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        myAddress = findViewById(R.id.myAddress);
+        myFavourites = findViewById(R.id.myFavourites);
+        orderHistory = findViewById(R.id.orderHistory);
+        paymentMethod = findViewById(R.id.paymentMethod);
+        changePassword = findViewById(R.id.changePassword);
+        help = findViewById(R.id.help);
+        logOut = findViewById(R.id.logOut);
     }
+
 
     public void myAddressClicked(View view) {
         // Show a toast message.
@@ -98,8 +98,11 @@ public class ProfileActivity extends AppCompatActivity {
     }
     public void logOutClicked(View view) {
         // Show a toast message.
-        Intent intent = new Intent(ProfileActivity.this, HomeActivity.class);
+        firebaseAuth.signOut();
+        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+        finish();
     }
 
 }

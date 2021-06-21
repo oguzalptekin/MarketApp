@@ -40,13 +40,15 @@ public class AddCreditCardActivity extends AppCompatActivity {
 
         int monthDate = Integer.parseInt(month.getText().toString());
         int yearDate = Integer.parseInt(year.getText().toString());
-        int cardNumber = Integer.parseInt(cardno.getText().toString());
+        String cardNumber =(cardno.getText().toString());
         String owner = namesurname.getText().toString();
-        int cvcNo = Integer.parseInt(cvc.getText().toString());
+        String cvcNo = (cvc.getText().toString());
 
 
         Date date = new Date(monthDate, yearDate);
-        CreditCard creditCard = new CreditCard(owner, cardNumber, date, cvcNo);
+        //CreditCard creditCard = new CreditCard(owner, cardNumber, date, cvcNo);
+
+        CreditCard creditCard = new CreditCard(owner,cardNumber,1111,cvcNo,date);
 
         FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
         final String currentUid = currentUser.getUid();

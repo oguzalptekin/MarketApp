@@ -62,7 +62,6 @@ public class PaymentActivity extends AppCompatActivity {
 
 
                 int cardLim=Integer.parseInt(limit);
-
                 if (name.matches("")){
                     cardHolderName.setError("Name required");
                     cardHolderName.requestFocus();
@@ -113,6 +112,7 @@ public class PaymentActivity extends AppCompatActivity {
                     cvv.setError("Cvv must be 3 digits");
                     cvv.requestFocus();
                 }
+
                 CreditCard creditCard=new CreditCard(name,num,cardLim,date,cvvNum);
 
                 FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();

@@ -7,7 +7,9 @@ public class Drinks extends Product {
     public Drinks(){}
 
     public Drinks(String categoryname, String type, int price, int stock, int quantity, String productname, int litre,  String brand) {
-        super(categoryname, type, price, stock, quantity, productname);
+        super(categoryname, type, price, stock, quantity);
+
+        this.productname=productname;
         this.litre = litre;
         this.brand = brand;
     }

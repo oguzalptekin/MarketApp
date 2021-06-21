@@ -23,16 +23,6 @@ public class CosmeticsAdapter extends RecyclerView.Adapter<CosmeticsAdapter.MyVi
     public void setOnItemClickListener(CosmeticsAdapter.OnItemClickListener listener){
         mListener=listener;
     }
-
-    private CosmeticsAdapter.OnItemClickListener mListener;
-
-    public interface OnItemClickListener{
-        void OnItemClick(int position);
-    }
-    public void setOnItemClickListener(CosmeticsAdapter.OnItemClickListener listener){
-        mListener=listener;
-    }
-
     public CosmeticsAdapter(Context context, ArrayList<Cosmetics> cosmeticsArrayList) {
         this.context = context;
         this.cosmeticsArrayList = cosmeticsArrayList;

@@ -53,6 +53,12 @@ public class Customer extends User{
         this.phoneNumber = phoneNumber;
         this.cart = cart;
     }
+    public Customer(String firstName, String lastName, String email,  String phoneNumber, CreditCard creditcard, String uid) {
+        super(firstName, lastName, email);
+        this.creditcard = creditcard;
+        Uid = uid;
+        this.phoneNumber = phoneNumber;
+    }
 
     public ArrayList<Product> getCart() {
         return cart;

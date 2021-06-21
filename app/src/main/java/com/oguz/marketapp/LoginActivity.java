@@ -31,22 +31,21 @@ public class LoginActivity extends AppCompatActivity {
 
         emailTxt = findViewById(R.id.emailTxt);
         passwordTxt = findViewById(R.id.passwordTxt);
-        forgetBtn = findViewById(R.id.forgetBtn);
         SignInBtn = findViewById(R.id.SignInBtn);
         SignUpBtn = findViewById(R.id.SignUpBtn);
 
         firebaseAuth = FirebaseAuth.getInstance();
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
-        /*if(firebaseAuth.getCurrentUser() != null){
-            //System.out.println(firebaseAuth.getCurrentUser().getEmail());
-            Intent homeintent = new Intent(com.oguz.marketapp.LoginActivity.this, com.oguz.marketapp.HomeActivity.class);
+        if(firebaseAuth.getCurrentUser() != null){
+            Intent homeintent = new Intent(LoginActivity.this, HomeActivity.class);
             startActivity(homeintent);
             finish();
-        }*/
+        }
     }
 
     public void SignUpClicked(View view){

@@ -6,7 +6,8 @@ public class Baker extends Product{
     public Baker(){}
 
     public Baker(String categoryname, String type, int price, int stock, int quantity, String productname, int weight) {
-        super(categoryname, type, price, stock, quantity, productname);
+        super(categoryname, type, price, stock, quantity);
+        this.productname=productname;
         this.weight = weight;
     }
 

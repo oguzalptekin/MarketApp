@@ -45,9 +45,8 @@ public class SnackAdapter extends RecyclerView.Adapter<SnackAdapter.MyViewHolder
         Snacks snacks=snacksArrayList.get(position);
 
         holder.snackname.setText(snacks.productname);
-        holder.snackprice.setText(snacks.price+"");
-        holder.snackweight.setText(snacks.weight+"");
-
+        holder.snackprice.setText(String.valueOf(snacks.price));
+        holder.snackweight.setText(String.valueOf(snacks.weight));
     }
 
     @Override

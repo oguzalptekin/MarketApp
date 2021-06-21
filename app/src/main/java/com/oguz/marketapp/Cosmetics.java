@@ -5,7 +5,8 @@ public class Cosmetics extends Product{
 
     public Cosmetics(){}
     public Cosmetics(String categoryname, String type, int price, int stock, int quantity, String productname, String gender, String brand) {
-        super(categoryname, type, price, stock, quantity, productname);
+        super(categoryname, type, price, stock, quantity);
+        this.productname=productname;
         this.brand=brand;
         this.gender = gender;
     }

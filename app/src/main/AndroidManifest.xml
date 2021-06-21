@@ -11,7 +11,13 @@
         android:theme="@style/Theme.MarketApp">
         <activity android:name=".PaymentActivity"></activity>
         <activity android:name=".CartActivity" />
-        <activity android:name=".LoadingScreen" />
+        <activity android:name=".LoadingScreen" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".CosmeticsActivity" />
         <activity android:name=".PetFoodActivity" />
         <activity android:name=".StapleActivity" />
@@ -22,14 +28,21 @@
         <activity android:name=".GreenGrocerActivity" />
         <activity android:name=".DrinkActivity" />
         <activity android:name=".SnackActivity" />
+        <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".AddCreditCardActivity" />
+        <activity android:name=".PaymentMethodActivity" />
+        <activity android:name=".EditCategoryActivity" />
+        <activity android:name=".DeleteCategoryActivity" />
+        <activity android:name=".AddCategoryActivity"/>
+        <activity android:name=".EditProductActivity" />
+        <activity android:name=".AddProductActivity" />
+        <activity android:name=".DeleteProductActivity" />
+        <activity android:name=".AdminPanelActivity" />
         <activity android:name=".HomeActivity" />
         <activity android:name=".SignUpActivity" />
+        <activity android:name=".HelpActivity" />
+        <activity android:name=".ProfileActivity" />
         <activity android:name=".LoginActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

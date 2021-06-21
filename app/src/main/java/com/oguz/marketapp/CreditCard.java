@@ -6,6 +6,7 @@ public class CreditCard {
     private int cardLimit;
     private String expirationDate;
     private String cvv;
+    private Date expdate;
 
     public CreditCard(String cardholderName, String cardNumber, int cardLimit, String expirationDate, String cvv) {
         this.cardholderName = cardholderName;
@@ -13,6 +14,14 @@ public class CreditCard {
         this.cardLimit = cardLimit;
         this.expirationDate = expirationDate;
         this.cvv = cvv;
+    }
+
+    public CreditCard(String cardholderName, String cardNumber, int cardLimit, String cvv, Date expdate) {
+        this.cardholderName = cardholderName;
+        this.cardNumber = cardNumber;
+        this.cardLimit = cardLimit;
+        this.cvv = cvv;
+        this.expdate = expdate;
     }
 
     public String getCardholderName() {

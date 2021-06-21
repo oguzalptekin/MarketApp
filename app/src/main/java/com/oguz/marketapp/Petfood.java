@@ -6,8 +6,9 @@ public class Petfood extends Product{
     public Petfood(){}
 
     public Petfood(String categoryname, String type, int price, int stock, int quantity, String productname, String animal, int weight, String brand) {
-        super(categoryname, type, price, stock, quantity, productname);
+        super(categoryname, type, price, stock, quantity);
         this.animal = animal;
+        this.productname=productname;
         this.weight = weight;
         this.brand = brand;
     }

@@ -7,9 +7,10 @@ public class StapleFood extends Product{
     public StapleFood(){}
 
     public StapleFood(String categoryname, String type, int price, int stock,  int quantity,String productname, String brand, int weight) {
-        super(categoryname, type, price, stock, quantity, productname);
+        super(categoryname, type, price, stock, quantity);
         this.brand=brand;
         this.weight = weight;
+        this.productname=productname;
     }
 
     public String getBrand() {

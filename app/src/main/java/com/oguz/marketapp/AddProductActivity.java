@@ -212,14 +212,14 @@ public class AddProductActivity extends AppCompatActivity {
             Others other = new Others(category, type, price, stock, 1, name, brand);
             product.put("Others", other);
         }
-
-        //System.out.println(product.isEmpty());
         firebaseFirestore.collection(category).document("Test")
                 .set(product).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
+                Intent intent = new Intent(AddProductActivity.this,AdminPanelActivity.class);
                 System.out.println("eklendi");
             }
+
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
