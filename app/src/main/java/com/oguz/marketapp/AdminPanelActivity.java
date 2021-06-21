@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.oguz.marketapp.R;
 import com.oguz.marketapp.ui.main.SectionsPagerAdapter;
 
 public class AdminPanelActivity extends AppCompatActivity {

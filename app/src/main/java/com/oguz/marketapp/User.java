@@ -6,6 +6,8 @@ public class User {
     private String LastName;
     private String email;
 
+    public User(){}
+
     public User(String firstName, String lastName, String email) {
         FirstName = firstName;
         LastName = lastName;

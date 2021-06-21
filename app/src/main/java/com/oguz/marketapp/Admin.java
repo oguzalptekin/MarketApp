@@ -1,6 +1,8 @@
 package com.oguz.marketapp;
 
-public class Admin extends User{
+import com.oguz.marketapp.User;
+
+public class Admin extends User {
 
     private String status;
 

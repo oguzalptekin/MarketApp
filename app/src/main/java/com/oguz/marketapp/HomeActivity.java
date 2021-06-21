@@ -1,5 +1,6 @@
 package com.oguz.marketapp;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -10,10 +11,13 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -22,17 +26,49 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
+public class HomeActivity extends AppCompatActivity{
     CardView cardView;
+    ImageButton cartbutton;
     RecyclerView recyclerView;
     ArrayList<Product> productArrayList;
     MyAdapter myAdapter;
     FirebaseFirestore db;
     ProgressDialog progressDialog;
+    BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        cartbutton=findViewById(R.id.cartbtn);
+
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setSelectedItemId(R.id.home_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.cart_navigation:
+                        startActivity(new Intent(getApplicationContext(), CartActivity.class));
+                        return true;
+                    case R.id.home_navigation:
+                        return true;
+                    case R.id.profile_navigation:
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        return true;
+                }
+                return false;
+            }
+        });
+
+        cartbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomeActivity.this,CartActivity.class);
+                startActivity(intent);
+            }
+        });
 
         progressDialog= new ProgressDialog(this);
         progressDialog.setCancelable(false);
@@ -96,6 +132,10 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     Intent intenttoproduct = new Intent(HomeActivity.this, OthersActivity.class);
                     startActivity(intenttoproduct);
                 }
+                if(productArrayList.get(position).categoryname.equals("Cosmetics")){
+                    Intent intenttoproduct = new Intent(HomeActivity.this, CosmeticsActivity.class);
+                    startActivity(intenttoproduct);
+                }
 
             }
         });
@@ -113,7 +153,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 for (DocumentChange dc: value.getDocumentChanges()){
                     if (dc.getType()==DocumentChange.Type.ADDED){
                         productArrayList.add(dc.getDocument().toObject(Product.class));
-
                     }
                     myAdapter.notifyDataSetChanged();
                     if (progressDialog.isShowing())
@@ -121,11 +160,5 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 }
             }
         });
-    }
-
-    @Override
-    public void onClick(View v) {
-        Intent intenttoproduct = new Intent(this, SnackActivity.class);
-        startActivity(intenttoproduct);
     }
 }

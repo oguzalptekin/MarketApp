@@ -10,4 +10,5 @@
     <color name="loginbackground">#1D1141</color>
     <color name="emailandpasswordbackground">#F6F5F7</color>
     <color name="buttonbackground">#4F025C</color>
+    <color name="nav_background">#2A00FF</color>
 </resources>

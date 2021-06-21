@@ -9,26 +9,43 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MarketApp">
-        <activity android:name=".LoadingScreen"></activity>
-        <activity android:name=".CosmeticsActivity" />
-        <activity android:name=".PetFoodActivity" />
-        <activity android:name=".StapleActivity" />
-        <activity android:name=".BakerActivity" />
-        <activity android:name=".TechnologyActivity" />
-        <activity android:name=".FoodActivity" />
-        <activity android:name=".OthersActivity" />
-        <activity android:name=".GreenGrocerActivity" />
-        <activity android:name=".DrinkActivity" />
-        <activity android:name=".SnackActivity" />
-        <activity android:name=".HomeActivity" />
-        <activity android:name=".SignUpActivity" />
-        <activity android:name=".LoginActivity">
+        <activity android:name=".PaymentActivity"></activity>
+        <activity android:name=".AddCreditCardActivity" />
+        <activity android:name=".PaymentMethodActivity" />
+        <activity android:name=".ChangePasswordActivity" />
+        <activity android:name=".HelpActivity" />
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".LoadingScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".CartActivity" />
+        <activity android:name=".TechnologyActivity" />
+        <activity android:name=".StapleActivity" />
+        <activity android:name=".SnackActivity" />
+        <activity android:name=".PetFoodActivity" />
+        <activity android:name=".OthersActivity" />
+        <activity android:name=".GreenGrocerActivity" />
+        <activity android:name=".FoodActivity" />
+        <activity android:name=".DrinkActivity" />
+        <activity android:name=".CosmeticsActivity" />
+        <activity android:name=".BakerActivity" />
+        <activity android:name=".EditCategoryActivity" />
+        <activity android:name=".DeleteCategoryActivity" />
+        <activity android:name=".AddCategoryActivity" />
+        <activity android:name=".EditProductActivity" />
+        <activity android:name=".DeleteProductActivity" />
+        <activity android:name=".AddProductActivity" />
+        <activity
+            android:name=".AdminPanelActivity"
+            android:label="@string/title_activity_admin_panel"
+            android:theme="@style/Theme.MarketApp.NoActionBar" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".SignUpActivity" />
+        <activity android:name=".LoginActivity" />
     </application>
 
 </manifest>

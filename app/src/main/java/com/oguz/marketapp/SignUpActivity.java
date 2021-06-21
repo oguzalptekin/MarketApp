@@ -8,14 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -86,20 +84,21 @@ public class SignUpActivity extends AppCompatActivity {
                 firebaseAuth.createUserWithEmailAndPassword(email, password).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
                     @Override
                     public void onSuccess(AuthResult authResult) {
-                        Customer customer = new Customer(name, surname, email, phoneNumber);
-                        System.out.println(customer.getPhoneNumber());
+                        Customer customer = new Customer(name, surname, email, phoneNumber, firebaseAuth.getCurrentUser().getUid());
+                        //System.out.println(customer.getPhoneNumber());
                         HashMap<String, Object>  customerData = new HashMap<>();
                         customerData.put("customer", customer);
-                        firebaseFirestore.collection("Customers").add(customerData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                            @Override
-                            public void onSuccess(DocumentReference documentReference) {
-                                Toast.makeText(SignUpActivity.this, "User Created Successfully", Toast.LENGTH_LONG).show();
-                                Intent intentHome = new Intent(SignUpActivity.this, LoadingScreen.class);
-                                //intentHome.putExtra("username", customer.getFirstName());
-                                intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                                startActivity(intentHome);
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
+                        firebaseFirestore.collection("Customers").document(firebaseAuth.getCurrentUser().getUid()).set(customer)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Toast.makeText(SignUpActivity.this, "User Created Successfully", Toast.LENGTH_LONG).show();
+                                        Intent intentHome = new Intent(SignUpActivity.this, HomeActivity.class);
+                                        //intentHome.putExtra("username", customer.getFirstName());
+                                        intentHome.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                        startActivity(intentHome);
+                                    }
+                                }).addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Toast.makeText(SignUpActivity.this, e.getLocalizedMessage().toString(), Toast.LENGTH_LONG).show();
@@ -116,8 +115,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
         }
     }
-
-
     public void SignInClicked(View view){
         Intent intentback = new Intent(SignUpActivity.this, LoginActivity.class);
         startActivity(intentback);
