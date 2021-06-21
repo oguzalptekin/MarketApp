@@ -6,20 +6,10 @@ public class Drinks extends Product {
 
     public Drinks(){}
 
-    public Drinks(String categoryname, String type, int price, int stock, int quantity, int litre, String brand, String type1,String productname) {
-        super(categoryname, type, price, stock, quantity);
+    public Drinks(String categoryname, String type, int price, int stock, int quantity, String productname, int litre,  String brand) {
+        super(categoryname, type, price, stock, quantity, productname);
         this.litre = litre;
         this.brand = brand;
-        this.type = type1;
-        this.productname=productname;
-    }
-
-    public String getProductname() {
-        return productname;
-    }
-
-    public void setProductname(String productname) {
-        this.productname = productname;
     }
 
     public int getLitre() {
@@ -44,5 +34,13 @@ public class Drinks extends Product {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getProductname() {
+        return productname;
+    }
+
+    public void setProductname(String productname) {
+        this.productname = productname;
     }
 }

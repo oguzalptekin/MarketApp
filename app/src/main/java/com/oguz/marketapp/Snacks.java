@@ -4,14 +4,14 @@ public class Snacks extends Product {
     int calory,weight;
     String brand,productname;
 
+
     public Snacks(){}
 
-    public Snacks(String categoryname, String type, int price, int stock, int quantity, int calory, int weight, String brand,String productname) {
-        super(categoryname, type, price, stock, quantity);
+    public Snacks(String categoryname, String type, int price, int stock, int quantity, String productname, int calory, int weight, String brand) {
+        super(categoryname, type, price, stock, quantity,productname);
         this.calory = calory;
         this.weight = weight;
         this.brand = brand;
-        this.productname=productname;
     }
 
     public int getCalory() {

@@ -7,8 +7,15 @@ public class GreenGrocer extends Product{
     public GreenGrocer(){}
 
     public GreenGrocer(String categoryname, String type, int price, int stock, int quantity, String productname, int weight) {
-        super(categoryname, type, price, stock, quantity);
-        this.productname = productname;
+        super(categoryname, type, price, stock, quantity, productname);
+        this.weight = weight;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
@@ -18,13 +25,5 @@ public class GreenGrocer extends Product{
 
     public void setProductname(String productname) {
         this.productname = productname;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
     }
 }

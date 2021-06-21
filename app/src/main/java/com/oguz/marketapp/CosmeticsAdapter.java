@@ -12,8 +12,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class CosmeticsAdapter extends RecyclerView.Adapter<CosmeticsAdapter.MyViewHolder>{
-        Context context;
-        ArrayList<Cosmetics> cosmeticsArrayList;
+    Context context;
+    ArrayList<Cosmetics> cosmeticsArrayList;
+
+    private CosmeticsAdapter.OnItemClickListener mListener;
+
+    public interface OnItemClickListener{
+        void OnItemClick(int position);
+    }
+    public void setOnItemClickListener(CosmeticsAdapter.OnItemClickListener listener){
+        mListener=listener;
+    }
 
     private CosmeticsAdapter.OnItemClickListener mListener;
 

@@ -4,9 +4,8 @@ public class Food extends Product{
     String productname,brand;
 
     public Food(){}
-    public Food(String categoryname, String type, int price, int stock, int quantity, String brand, String productname) {
-        super(categoryname, type, price, stock, quantity);
-        this.productname = productname;
+    public Food(String categoryname, String type, int price, int stock, int quantity, String productname, String brand) {
+        super(categoryname, type, price, stock, quantity, productname);
         this.brand=brand;
     }
 

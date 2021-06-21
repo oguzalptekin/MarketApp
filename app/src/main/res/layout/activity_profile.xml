@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ProfileActivity">
+
+    <LinearLayout
+        android:id="@+id/infoLinear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingBottom="20dp"
+        app:layout_constraintBottom_toTopOf="@id/info2Linear"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="30dp"
+            app:srcCompat="@drawable/loginlogo">
+
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="40dp"
+            android:text="Oguz Alptekin"
+            android:textAlignment="center"
+            android:textSize="30sp">
+
+        </TextView>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/info2Linear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@id/process"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infoLinear">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:text="E-Mail"
+            android:textAlignment="center"
+            android:textSize="20sp"></TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:text="Phone Number"
+            android:textAlignment="center"
+            android:textSize="20sp"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/process"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:layout_marginBottom="100dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/info2Linear">
+
+        <LinearLayout
+            android:id="@+id/myAddress"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:onClick="myAddressClicked">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="My Addresses"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:clickable="true">
+
+            </TextView>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </View>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/greater">
+
+            </ImageView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/myFavourites"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:onClick="myFavouritesClicked">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="My Favourites"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                >
+            </TextView>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </View>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/greater">
+            </ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/orderHistory"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:onClick="orderHistoryClicked">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Order History"
+                android:textAlignment="center"
+                android:textSize="20sp">
+            </TextView>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </View>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/greater">
+
+            </ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/paymentMethod"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:onClick="paymentMethodClicked">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Payment Methods"
+                android:textAlignment="center"
+                android:textSize="20sp">
+
+            </TextView>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </View>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/greater">
+
+            </ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/changePassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:onClick="changePasswordClicked">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Change Password"
+                android:textAlignment="center"
+                android:textSize="20sp">
+
+            </TextView>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </View>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/greater">
+
+            </ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/help"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:clickable="true"
+            android:onClick="helpClicked">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Help"
+                android:textAlignment="center"
+                android:textSize="20sp">
+
+            </TextView>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </View>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/greater">
+
+            </ImageView>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/logOut"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:onClick="logOutClicked"
+            android:clickable="true">
+
+            <TextView
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="Log Out"
+                android:textAlignment="center"
+                android:textSize="20sp"
+                android:clickable="true">
+
+            </TextView>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            </View>
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/greater">
+
+            </ImageView>
+        </LinearLayout>
+    </LinearLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        app:itemBackground="@color/nav_background"
+        app:itemIconTint="@drawable/selector"
+        app:itemTextColor="@drawable/selector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/menu_navigation">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

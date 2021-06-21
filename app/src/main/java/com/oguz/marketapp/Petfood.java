@@ -1,14 +1,30 @@
 package com.oguz.marketapp;
 
 public class Petfood extends Product{
-    String productname,whichAnimal;
+    String productname,animal, brand;
     int weight;
     public Petfood(){}
 
-    public Petfood(String categoryname, String type, int price, int stock, int quantity, String productname, String whichAnimal, int weight) {
-        super(categoryname, type, price, stock, quantity);
-        this.productname = productname;
-        this.whichAnimal = whichAnimal;
+    public Petfood(String categoryname, String type, int price, int stock, int quantity, String productname, String animal, int weight, String brand) {
+        super(categoryname, type, price, stock, quantity, productname);
+        this.animal = animal;
+        this.weight = weight;
+        this.brand = brand;
+    }
+
+    public String getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(String whichAnimal) {
+        this.animal = whichAnimal;
+    }
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 
@@ -20,19 +36,11 @@ public class Petfood extends Product{
         this.productname = productname;
     }
 
-    public String getWhichAnimal() {
-        return whichAnimal;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setWhichAnimal(String whichAnimal) {
-        this.whichAnimal = whichAnimal;
-    }
-
-    public int getWeight() {
-        return weight;
-    }
-
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void setBrand(String brand) {
+        this.brand = brand;
     }
 }

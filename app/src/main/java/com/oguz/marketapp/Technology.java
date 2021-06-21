@@ -4,9 +4,8 @@ public class Technology extends Product{
     String productname,brand;
     public Technology(){}
 
-    public Technology(String categoryname, String type, int price, int stock, int quantity, String productname,String brand) {
-        super(categoryname, type, price, stock, quantity);
-        this.productname = productname;
+    public Technology(String categoryname, String type, int price, int stock, int quantity,String productname, String brand) {
+        super(categoryname, type, price, stock, quantity, productname);
         this.brand=brand;
     }
 

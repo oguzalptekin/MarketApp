@@ -43,7 +43,7 @@ public class PetfoodAdapter extends RecyclerView.Adapter<PetfoodAdapter.MyViewHo
 
         holder.petfoodname.setText(petfood.productname);
         holder.petfoodprice.setText(petfood.price+"");
-        holder.petfoodwhich.setText(petfood.whichAnimal);
+        holder.petfoodwhich.setText(petfood.animal);
     }
 
     @Override
